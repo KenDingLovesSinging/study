@@ -111,18 +111,19 @@ applyBeanPostProcessorAfterInitialization方法中，如果我们自己实现了
 
 
 ## IOC用到的设计模式
-###工厂模式
+
+#### 工厂模式
 Spring使用工厂模式可以通过BeanFactory或ApplicationContext来创建 bean 对象。
 两者对比：
 BeanFactory ：延迟注入(使用到某个bean的时候才会注入)，相比于ApplicationContext来说会占用更少的内存，程序启动速度更快。
 ApplicationContext ：容器启动的时候，一次性创建所有 非懒加载的bean。BeanFactory 仅提供了最基本的依赖注入支持，ApplicationContext是BeanFactory的子接口,除了有BeanFactory的功能还有一些额外功能。
 
-###单例模式
+#### 单例模式
 在Spring中bean的默认scope就是singleton。实例化完成的单例bean都会缓存在BeanFactory的ConcurrentHashMap对象singletonObjects中。
 
-###装饰者模式
+#### 装饰者模式
 在Spring中将bean本身作为参数来生成bean的包装类对象BeanWrapperImpl，在不改变原有对象的情况下为对象提供了扩展功能。
 
-###策略模式
+#### 策略模式
 在依赖注入的过程中，Spring会调用ApplicationContext 来获取Resource的实例。然而，Resource 接口封装了各种可能的资源类型，包括了：UrlResource，ClassPathResource，FileSystemResource等，Spring需要针对不同的资源采取不同的访问策略。在这里，Spring让ApplicationContext成为了资源访问策略的“决策者”。在资源访问策略的选择上，Spring采用了策略模式。当 Spring 应用需要进行资源访问时，它并不需要直接使用 Resource 实现类，而是调用 ApplicationContext 实例的 getResource() 方法来获得资源，ApplicationContext 将会负责选择 Resource 的实现类，也就是确定具体的资源访问策略，从而将应用程序和具体的资源访问策略分离开来。
 
