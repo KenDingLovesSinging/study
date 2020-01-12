@@ -85,10 +85,10 @@ doCreateBean方法中，调用createBeanInstance实例化bean
 ![](/study/images/blog/ioc/ioc23.png)
 
 先看populateBean方法。从RootBeanDefinition上获取PropertyValues对象，也就是xml中<property>标签所包含的内容。进入下方applyPropertyValues方法
-![](/study/images/blog/ioc/ioc-24.png)
+![](/study/images/blog/ioc/ioc24.png)
 
 在applyPropertyValues方法中，新建了BeanDefinitionValueResolver用于返回需要注入的基本数据类型值或者对象引用，新建一个deepCopy ArrayList用于记录需要进行setter注入的PropertyValue对象。for循环遍历PropertyValue，调用valueResolver.resolveValue获取<property>标签中注入的基本数据类型值或者引用对象。
-![](/study/images/blog/ioc/ioc-25.png)
+![](/study/images/blog/ioc/ioc25.png)
 
 进入resolveValue方法，如果需要注入的值是基本数据类型，则返回该值
 ![](/study/images/blog/ioc/ioc26.png)
