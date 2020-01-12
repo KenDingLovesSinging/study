@@ -53,8 +53,11 @@ doLoadBeanDefinitions中会通过InputStream生成一个Document对象，也就�
 需要注意的是bean id会保存在beanName字段中，但是beanDefinition中只会存有除bean名字外的配置
 ![](/study/images/blog/ioc/ioc14.png)
 
-继续往里进入registerBeanDefinition方法，bean的id作为key，beanDefinition作为value被存放在DefaultListableBeanFactory的beanDefinitionMap中，同时id还被存入beanDefinitionNames中。至此bean的加载和注册完成。
+继续往里进入registerBeanDefinition方法，bean的id作为key，beanDefinition作为value被存放在DefaultListableBeanFactory的beanDefinitionMap中，同时id还被存入beanDefinitionNames中。
+至此bean的加载和注册完成。
+
 ![](/study/images/blog/ioc/ioc15.png)
+
 
 #### Bean实例化和依赖注入
 说完了Bean的加载和注册，我们来看一下Bean依赖注入的过程。首先回到之前的refresh方法，其中调用了finishBeanFactoryInitialization来进行依赖注入的。我们点进去往里看，最后一行调用了preInstantiateSingletons方法，从字面上也能理解是预先实例化单例bean对象。
@@ -82,10 +85,10 @@ doCreateBean方法中，调用createBeanInstance实例化bean
 ![](/study/images/blog/ioc/ioc23.png)
 
 先看populateBean方法。从RootBeanDefinition上获取PropertyValues对象，也就是xml中<property>标签所包含的内容。进入下方applyPropertyValues方法
-![](/study/images/blog/ioc/ioc24.png)
+![](/study/images/blog/ioc/ioc-24.png)
 
 在applyPropertyValues方法中，新建了BeanDefinitionValueResolver用于返回需要注入的基本数据类型值或者对象引用，新建一个deepCopy ArrayList用于记录需要进行setter注入的PropertyValue对象。for循环遍历PropertyValue，调用valueResolver.resolveValue获取<property>标签中注入的基本数据类型值或者引用对象。
-![](/study/images/blog/ioc/ioc25.png)
+![](/study/images/blog/ioc/ioc-25.png)
 
 进入resolveValue方法，如果需要注入的值是基本数据类型，则返回该值
 ![](/study/images/blog/ioc/ioc26.png)
