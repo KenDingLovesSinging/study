@@ -44,11 +44,11 @@ doLoadBeanDefinitions中会通过InputStream生成一个Document对象，也就�
 ![](https://kendingr.github.io/study/images/ioc/ioc10.png)
 
 如果读入的dom元素是<alias>，则会将alias注册在AliasRegistry的缓存中，key是alias，value是bean id
-![](https://kendingr.github.io/study/images/ioc/ioc11.png)
-![](https://kendingr.github.io/study/images/ioc/ioc12.png)
+![register alias](https://kendingr.github.io/study/images/ioc/ioc11.png)
+![alias map](https://kendingr.github.io/study/images/ioc/ioc12.png)
 
 如果读到的dom元素是<bean>，则会创建BeanDefinitionHolder对象，对应于<bean>标签里配置内容
-![](https://kendingr.github.io/study/images/ioc/ioc13.png)
+![create BeanDefinitionHolder](https://kendingr.github.io/study/images/ioc/ioc13.png)
 
 需要注意的是bean id会保存在beanName字段中，但是beanDefinition中只会存有除bean名字外的配置
 ![](https://kendingr.github.io/study/images/ioc/ioc14.png)
